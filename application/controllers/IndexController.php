@@ -40,7 +40,7 @@ class IndexController extends Zend_Controller_Action {
 			echo "<script language='javascript'>alert('Goe coordinates INCORRECT format :P');</script>";			
 			return;
 		}
-		print_r($matches);
+//		print_r($matches);
 //		return;
 	}
 	
