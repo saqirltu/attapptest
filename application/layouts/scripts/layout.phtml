@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="shortcut icon" href="images/favicon.ico" />
+<title>AttApp</title>
+<style type="text/css">
+body,td,th {
+	font-family: "Comic Sans MS", cursive;
+}
+
+body {
+	background-color: #CCC;
+}
+
+</style>
+</head>
+
+<body>
+	<a href="<?php echo $this->url(array('controller'=>'pointq','action'=>'index'), 'default', true) ?>">Point Question</a>&nbsp;&nbsp;
+	<a href="<?php echo $this->url(array('controller'=>'regionq','action'=>'index'), 'default', true) ?>">Regional Question</a>&nbsp;&nbsp;
+<!--	<a href="<?php echo $this->url(array('controller'=>'latest','action'=>'index'), 'default', true) ?>">LATEST 50</a>-->
+	
+<div style="float:right;">
+	    <?php if (!isset($_SESSION)) {
+	        	session_start();
+	        }if (isset($_SESSION['user'])) {
+				echo "<b style='margin-right: 20px;'>Hello! ".$_SESSION["user"]->getName()."</b>";
+			} ?>
+	    
+	    <a href="<?php echo $this->url(array('controller'=>'index','action'=>'logout'), 'default', true) ?>">Logout</a>
+    </div>
+
+<hr />
+
+<?php echo $this->layout()->content ?>
+
+
+</body>
+</html>

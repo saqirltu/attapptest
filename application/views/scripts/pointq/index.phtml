@@ -1,0 +1,304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Collecting - AttApp</title>
+    
+<script>
+function copyAnswers()
+  {
+  document.getElementById("aSv").value = document.getElementById("aEn").value;
+  document.getElementById("bSv").value = document.getElementById("bEn").value;
+  document.getElementById("cSv").value = document.getElementById("cEn").value;
+  document.getElementById("dSv").value = document.getElementById("dEn").value;
+  }
+</script>
+</head>
+
+<body>
+<h2>Here you can insert the question</h2>
+
+<form
+	action=<?php
+	echo $this->url ( array ('controller' => 'pointq','action' => 'save' ), 'default', true )?>
+	method="post">
+	
+
+<!--<table>-->
+<!--	<tr>-->
+<!--		<td colspan="6"><strong>Trigger Coord</strong></td>-->
+<!--        <td colspan="6"><strong>Question Coord 1</strong></td>-->
+<!--		<td colspan="5"><strong>Question Coord 2</strong></td>-->
+<!--	</tr>-->
+<!---->
+<!--	<tr>-->
+<!--		<td>Latitude:</td>-->
+<!--		<td><input type="text" name="triLat" value="<?php if(isset($_POST ['triLat'])){echo $_POST ['triLat'];}?>" style="width: 70px;"/></td>-->
+<!--		<td width="20"></td>-->
+<!--		<td>Longitude:</td>-->
+<!--		<td><input type="text" name="triLong" value="<?php if(isset($_POST ['triLong'])){echo $_POST ['triLong'];}?>" style="width: 70px;"/></td>-->
+<!--        <td width="20"></td>-->
+<!--		<td>Latitude:</td>-->
+<!--		<td><input type="text" name="q1Lat" value="<?php if(isset($_POST ['q1Lat'])){echo $_POST ['q1Lat'];}?>" style="width: 70px;"/></td>-->
+<!--		<td width="20"></td>-->
+<!--		<td>Longitude:</td>-->
+<!--		<td><input type="text" name="q1Long" value="<?php if(isset($_POST ['q1Long'])){echo $_POST ['q1Long'];}?>" style="width: 70px;"/></td>-->
+<!--		<td width="20"></td>-->
+<!--		<td>Latitude:</td>-->
+<!--		<td><input type="text" name="q2Lat" value="<?php if(isset($_POST ['q2Lat'])){echo $_POST ['q2Lat'];}?>" style="width: 70px;"/></td>-->
+<!--		<td width="20"></td>-->
+<!--		<td>Longitude:</td>-->
+<!--		<td><input type="text" name="q2Long" value="<?php if(isset($_POST ['q2Long'])){echo $_POST ['q2Long'];}?>" style="width: 70px;"/></td>-->
+<!--             -->
+<!--	</tr>-->
+<!--    -->
+<!--	<tr> -->
+<!--		<td><br /></td>-->
+<!--	</tr>-->
+<!--</table>-->
+
+
+<table>
+	<tr>
+		<td colspan="2"><strong>Trigger Coord</strong></td>
+        <td colspan="2"><strong>Question Coord 1</strong></td>
+		<td colspan="2"><strong>Question Coord 2</strong></td>
+	</tr>
+
+	<tr>
+		<td><input type="text" name="triPoint" style="width: 200px;"  <?php if(isset($_POST ['triPoint'])){echo 'value="'.$_POST ['triPoint'].'"';} 
+		else{ if(!isset($_SESSION)){session_start();} if(isset ( $_SESSION ['triPoint'] )){echo 'value="'.$_SESSION ['triPoint'].'"';}}?>/></td>
+		<td width="20"></td>
+        
+		<td><input type="text" name="q1Point" style="width: 200px;"  <?php if(isset($_POST ['q1Point'])){echo 'value="'.$_POST ['q1Point'].'"';} 
+		else{ if(!isset($_SESSION)){session_start();} if(isset ( $_SESSION ['q1Point'] )){echo 'value="'.$_SESSION ['q1Point'].'"';}}?>/></td>
+		<td width="20"></td>
+        
+		<td><input type="text" name="q2Point" style="width: 200px;"  <?php if(isset($_POST ['q2Point'])){echo 'value="'.$_POST ['q2Point'].'"';} 
+		else{ if(!isset($_SESSION)){session_start();} if(isset ( $_SESSION ['q2Point'] )){echo 'value="'.$_SESSION ['q2Point'].'"';}}?>/></td>
+		<td width="20"></td>
+        
+        <td><select name="apply">
+        	<option value="0">Apply for both</option>
+            <option value="1">Apply for Q1</option>
+            <option value="2">Apply for Q2</option>
+            </select>
+		</td>
+        <td width="20"></td>
+        <td>Keep Point<input name="keepPoint" type="checkbox" value="1"  <?php if(isset($_POST ['keepPoint'])){echo 'checked="checked"';} 
+		else{ if(!isset($_SESSION)){session_start();} if(isset ( $_SESSION ['keepPoint'] )){echo 'checked="checked"';}}?>/></td>     
+	</tr>
+    
+	<tr> 
+		<td><br /></td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<td colspan="11"><strong>Question in English</strong></td>
+	</tr>
+
+	<tr>
+		<td>Q</td>
+		<td colspan="10"><input type="text" name="qEn" value="<?php if(isset($_POST ['qEn'])){echo $_POST ['qEn'];}?>" style="width: 100%;" /></td>
+	</tr>
+
+	<tr>
+		<td>A</td>
+		<td><input id="aEn" type="text" name="aEn" value="<?php if(isset($_POST ['aEn'])){echo $_POST ['aEn'];}?>" style="width: 204px;"/></td>
+		<td width="20"></td>
+		<td>B</td>
+		<td><input id="bEn" type="text" name="bEn" value="<?php if(isset($_POST ['bEn'])){echo $_POST ['bEn'];}?>" style="width: 204px;"/></td>
+		<td width="20"></td>
+		<td>C</td>
+		<td><input id="cEn" type="text" name="cEn" value="<?php if(isset($_POST ['cEn'])){echo $_POST ['cEn'];}?>" style="width: 204px;"/></td>
+		<td width="20"></td>
+		<td>D</td>
+		<td><input id="dEn" type="text" name="dEn" value="<?php if(isset($_POST ['dEn'])){echo $_POST ['dEn'];}?>" style="width: 204px;"/></td>
+	</tr>
+    
+    <tr>
+		<td colspan="9" nowrap="nowrap">Extra Info (optional) <input type="text" name="exInfoEn" value="<?php if(isset($_POST ['exInfoEn'])){echo $_POST ['exInfoEn'];}?>" style="width: 100%;" /></td>
+	</tr>
+
+	<tr>
+		<td colspan="11"><br />
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="11"><strong>Fråga på Svenska</strong></td>
+	</tr>
+
+	<tr>
+		<td>Q</td>
+		<td colspan="10"><input type="text" name="qSv" value="<?php if(isset($_POST ['qSv'])){echo $_POST ['qSv'];}?>" style="width: 100%;" /></td>
+	</tr>
+
+	<tr>
+		<td>A</td>
+		<td><input id="aSv" type="text" name="aSv" value="<?php if(isset($_POST ['aSv'])){echo $_POST ['aSv'];}?>" style="width: 204px;"/></td>
+		<td width="20"></td>
+		<td>B</td>
+		<td><input id="bSv" type="text" name="bSv" value="<?php if(isset($_POST ['bSv'])){echo $_POST ['bSv'];}?>" style="width: 204px;"/></td>
+		<td width="20"></td>
+		<td>C</td>
+		<td><input id="cSv" type="text" name="cSv" value="<?php if(isset($_POST ['cSv'])){echo $_POST ['cSv'];}?>" style="width: 204px;"/></td>
+		<td width="20"></td>
+		<td>D</td>
+		<td><input id="dSv" type="text" name="dSv" value="<?php if(isset($_POST ['dSv'])){echo $_POST ['dSv'];}?>" style="width: 204px;"/></td>
+        <td><input type="button" onclick="copyAnswers()" value="Copy from English"/></td>
+	</tr>
+
+	<tr>
+		<td colspan="9" nowrap="nowrap">Extra Info (optional) <input type="text" name="exInfoSv" value="<?php if(isset($_POST ['exInfoSv'])){echo $_POST ['exInfoSv'];}?>" style="width: 100%;" /></td>
+	</tr>
+
+	<tr>
+		<td colspan="11"><br />	</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+    	<td><strong>Solution</strong></td>
+		<td><select name="sol">
+			<option value="0"></option>
+			<option value="1" <?php if(isset($_POST ['sol']) && $_POST ['sol']==1){echo "selected='selected'";}?>>A</option>
+			<option value="2" <?php if(isset($_POST ['sol']) && $_POST ['sol']==2){echo "selected='selected'";}?>>B</option>
+			<option value="3" <?php if(isset($_POST ['sol']) && $_POST ['sol']==3){echo "selected='selected'";}?>>C</option>
+			<option value="4" <?php if(isset($_POST ['sol']) && $_POST ['sol']==4){echo "selected='selected'";}?>>D</option>
+		</select></td>
+        <td width="20"></td>
+        <td><strong>Score</strong></td>
+		<td><select name="score">
+			<option value="0"></option>
+			<option value="1" <?php if(isset($_POST ['score']) && $_POST ['score']==1){echo "selected='selected'";}?>>1</option>
+			<option value="2" <?php if(isset($_POST ['score']) && $_POST ['score']==2){echo "selected='selected'";}?>>2</option>
+			<option value="3" <?php if(isset($_POST ['score']) && $_POST ['score']==3){echo "selected='selected'";}?>>3</option>
+		</select></td>
+        <td width="20"></td>
+        <td><strong>Category</strong></td>
+		<td><select name="category">
+			<option value="0" <?php if(isset($_POST ['category']) && $_POST ['category']==0){echo "selected='selected'";}?>>optional</option>
+			<option value="1" <?php if(isset($_POST ['category']) && $_POST ['category']==1){echo "selected='selected'";}?>>Surrounding</option>
+			<option value="2" <?php if(isset($_POST ['category']) && $_POST ['category']==2){echo "selected='selected'";}?>>Famous person</option>
+			<option value="3" <?php if(isset($_POST ['category']) && $_POST ['category']==3){echo "selected='selected'";}?>>History</option>
+            <option value="4" <?php if(isset($_POST ['category']) && $_POST ['category']==4){echo "selected='selected'";}?>>Nature</option>
+			<option value="5" <?php if(isset($_POST ['category']) && $_POST ['category']==5){echo "selected='selected'";}?>>Sports</option>            
+			<option value="6" <?php if(isset($_POST ['category']) && $_POST ['category']==6){echo "selected='selected'";}?>>Music</option>            
+            <option value="7" <?php if(isset($_POST ['category']) && $_POST ['category']==7){echo "selected='selected'";}?>>Food</option>
+            <option value="10" <?php if(isset($_POST ['category']) && $_POST ['category']==10){echo "selected='selected'";}?>>Other</option>
+		</select></td>
+		<td width="20"></td>
+		<td><input type="submit" value="Save"/></td>
+	</tr>
+	<tr>
+		<td><br /></td>
+	</tr>    
+</table>
+</form>
+
+<strong>Latest Point Question Collected:</strong>
+
+<table border="1" cellspacing="0">
+
+	<tr>
+		<th><?php echo "Q_ID"?></th>
+		<th><?php echo "Point_ID"?></th>
+		<th><?php echo "Q_English"?></th>
+		<th><?php echo "A_En"?></th>
+		<th><?php echo "B_En"?></th>
+		<th><?php echo "C_En"?></th>
+		<th><?php echo "D_En"?></th>
+		<th><?php echo "Extra_Info En"?></th>
+
+		<th><?php echo "Q_Svenska"?></th>
+		<th><?php echo "A_Sv"?></th>
+		<th><?php echo "B_Sv"?></th>
+		<th><?php echo "C_Sv"?></th>
+		<th><?php echo "D_Sv"?></th>
+		<th><?php echo "Extra_Info Sv"?></th>
+
+		<th><?php echo "Solution"?></th>
+		<th><?php echo "Score"?></th>
+		<th><?php echo "Category"?></th>
+	</tr>
+	
+	<?php foreach ($this->latest as $aQuestion){ ?>
+   	 <tr>
+		<td> 
+    		<?php echo $this->escape($aQuestion->getId())?>
+    	</td>
+		<td> 
+    		<?php echo $this->escape($aQuestion->getPointID())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getQEn())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getAEn())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getBEn())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getCEn())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getDEn())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getExInfoEn())?>
+    	</td>
+
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getQSv())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getASv())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getBSv())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getCSv())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getDSv())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getExInfoSv())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getSol())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getScore())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php switch($this->escape($aQuestion->getCategory())){
+    		case 0: echo ""; break;
+    		case 1: echo "Surrounding"; break;
+    		case 2: echo "Famous person"; break;
+    		case 3: echo "History"; break;
+    		case 4: echo "Nature"; break;
+    		case 5: echo "Sports"; break;
+    		case 6: echo "Music"; break;
+    		case 7: echo "Food"; break;
+    		default: echo "Other";
+			}
+			?>
+    	</td>
+	</tr>
+  
+    <?php
+	}
+	?>
+        
+</table>
+
+<br />
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Login - AttApp</title>
+<style type="text/css">
+body,td,th {
+	font-family: "Comic Sans MS", cursive;
+}
+
+body {
+	background-color: #CCC;
+}
+</style>
+</head>
+
+<body>
+<h1><strong>ATTAPP QUESTION COLLECTION SYSTEM</strong></h1>
+<p>for internal use, test and development only</p>
+<hr />
+
+
+<h2>Please Login</h2>
+
+<form
+	action="<?php
+	echo $this->url ( array ('action' => 'login' ), 'default', true )?>"
+	method="post">
+	
+	<table>
+		<tr>
+			<td>Username:</td>
+			<td><input type="text" name="username"/></td>
+		</tr>
+		<tr>
+			<td>Password:</td>
+			<td><input type="password" name="password"/></td>
+		</tr>
+	</table>
+	
+	<p>
+	<input type="radio" name="role" value="1">Admin</input> 
+	<input type="radio" name="role" checked value="2">Collector</input>
+	<input type="radio" name="role" value="3">Customer</input>
+	</p>
+	
+	<p><input type="submit" value="Login" /></p>
+
+</form>
+
+
+</body>
+</html>

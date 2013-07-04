@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Latest collections - AttApp</title>
+</head>
+<body>
+
+<table border="1" cellspacing="0">
+
+	<tr>
+		<th><?php echo "Q_ID"?></th>
+		<th><?php echo "Trig_Coord"?></th>
+		<th><?php echo "Q_Coord 1"?></th>
+		<th><?php echo "Q_Coord 2"?></th>
+
+		<th><?php echo "Q_English"?></th>
+		<th><?php echo "A_En"?></th>
+		<th><?php echo "B_En"?></th>
+		<th><?php echo "C_En"?></th>
+		<th><?php echo "D_En"?></th>
+		<th><?php echo "Extra_Info En"?></th>
+
+		<th><?php echo "Q_Svenska"?></th>
+		<th><?php echo "A_Sv"?></th>
+		<th><?php echo "B_Sv"?></th>
+		<th><?php echo "C_Sv"?></th>
+		<th><?php echo "D_Sv"?></th>
+		<th><?php echo "Extra_Info Sv"?></th>
+
+		<th><?php echo "Solution"?></th>
+		<th><?php echo "Score"?></th>
+		<th><?php echo "Category"?></th>
+	</tr>
+	
+	<?php foreach ($this->recentUpload as $aQuestion){ ?>
+   	 <tr>
+		<td> 
+    		<?php echo $this->escape($aQuestion->getId())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getTriLat())?>, <?php echo $this->escape($aQuestion->getTriLong())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getQ1Lat())?>, <?php echo $this->escape($aQuestion->getQ1Long())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getQ2Lat())?>, <?php echo $this->escape($aQuestion->getQ2Long())?>
+    	</td>
+
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getQEn())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getAEn())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getBEn())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getCEn())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getDEn())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getExInfoEn())?>
+    	</td>
+
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getQSv())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getASv())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getBSv())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getCSv())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getDSv())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getExInfoSv())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getSol())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php echo $this->escape($aQuestion->getScore())?>
+    	</td>
+		<td nowrap="nowrap">
+    		<?php switch($this->escape($aQuestion->getCategory())){
+    		case 0: echo ""; break;
+    		case 1: echo "Surrounding"; break;
+    		case 2: echo "Famous person"; break;
+    		case 3: echo "History"; break;
+    		case 4: echo "Nature"; break;
+    		case 5: echo "Sports"; break;
+    		case 6: echo "Music"; break;
+    		default: echo "Other";
+			}
+			?>
+    	</td>
+	</tr>
+  
+    <?php
+	}
+	?>
+        
+</table>
+
+</body>
+</html>
