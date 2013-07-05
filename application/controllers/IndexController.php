@@ -18,29 +18,29 @@ class IndexController extends Zend_Controller_Action {
 		}
 		
 		//Regular expression test
-		$subject1 = "57.645833° N 11.959333° E";
-    	$subject2 = "  57.645833 ,  11.959333  ";
-    	$subject3 = "  57.7283722  11.8610609  ";
-    	$pattern1 = '/^(-?\d{1,3}\.\d{2,8})°?\s*[NnSs]\s*(-?\d{1,3}\.\d{2,8})°?\s*[EeWw]\s*$/';
-		$pattern2 = '/^\s*(-?\d{1,3}\.\d{2,8})\s*,?\s*(-?\d{1,3}\.\d{2,8})\s*$/';
-		$pattern = '/^(\s*(-?\d{1,3}\.\d{2,8})\s*°\s*[NnSs]?\s*,?\s*(-?\d{1,3}\.\d{2,8})\s*°\s*[EeWw]?\s*)|(\s*(-?\d{1,3}\.\d{2,8})\s*,?\s*(-?\d{1,3}\.\d{2,8})\s*)$/';
-		if(preg_match($pattern, $subject1, $matches) == 0){
-			echo "<script language='javascript'>alert('Goe coordinates INCORRECT format :P');</script>";			
-			return;
-		}
-		print_r($matches);
-		echo "<br>";
-		if(preg_match($pattern, $subject2, $matches) == 0){
-			echo "<script language='javascript'>alert('Goe coordinates INCORRECT format :P');</script>";			
-			return;
-		}
-		print_r($matches);
-		echo "<br>";
-		if(preg_match($pattern2, $subject3, $matches) == 0){
-			echo "<script language='javascript'>alert('Goe coordinates INCORRECT format :P');</script>";			
-			return;
-		}
-		print_r($matches);
+//		$subject1 = "57.645833° N 11.959333° E";
+//    	$subject2 = "  57.645833 ,  11.959333  ";
+//    	$subject3 = "  57.7283722  11.8610609  ";
+//    	$pattern1 = '/^(-?\d{1,3}\.\d{2,8})°?\s*[NnSs]\s*(-?\d{1,3}\.\d{2,8})°?\s*[EeWw]\s*$/';
+//		$pattern2 = '/^\s*(-?\d{1,3}\.\d{2,8})\s*,?\s*(-?\d{1,3}\.\d{2,8})\s*$/';
+//		$pattern = '/^(\s*(-?\d{1,3}\.\d{2,8})\s*°\s*[NnSs]?\s*,?\s*(-?\d{1,3}\.\d{2,8})\s*°\s*[EeWw]?\s*)|(\s*(-?\d{1,3}\.\d{2,8})\s*,?\s*(-?\d{1,3}\.\d{2,8})\s*)$/';
+//		if(preg_match($pattern, $subject1, $matches) == 0){
+//			echo "<script language='javascript'>alert('Goe coordinates INCORRECT format :P');</script>";			
+//			return;
+//		}
+//		print_r($matches);
+//		echo "<br>";
+//		if(preg_match($pattern, $subject2, $matches) == 0){
+//			echo "<script language='javascript'>alert('Goe coordinates INCORRECT format :P');</script>";			
+//			return;
+//		}
+//		print_r($matches);
+//		echo "<br>";
+//		if(preg_match($pattern2, $subject3, $matches) == 0){
+//			echo "<script language='javascript'>alert('Goe coordinates INCORRECT format :P');</script>";			
+//			return;
+//		}
+//		print_r($matches);
 //		return;
 	}
 	
