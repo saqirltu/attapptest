@@ -42,22 +42,22 @@ class RegionqController extends Zend_Controller_Action
 		
 		$this->render('index');
 		
-		if($_POST ['regionID'] == NULL){
-			echo "<script language='javascript'>alert('You need to specify the region first :P');</script>";			
-			return;
-		}		
-		if ($_POST ['qEn'] == NULL || $_POST ['aEn']==NULL || $_POST ['bEn']==NULL || $_POST ['cEn']==NULL || $_POST ['dEn']==NULL) {
-			echo "<script language='javascript'>alert('Question in English not complete :P');</script>";			
-			return;
-		}
-		if ($_POST ['qSv'] == NULL || $_POST ['aSv']==NULL || $_POST ['bSv']==NULL || $_POST ['cSv']==NULL || $_POST ['dSv']==NULL) {
-			echo "<script language='javascript'>alert('Question in Swedish not complete :P');</script>";			
-			return;
-		}
-		if ($_POST ['sol'] == 0 || $_POST ['score']==0) {
-			echo "<script language='javascript'>alert('Score or Solution not complete :P');</script>";			
-			return;
-		}
+//		if($_POST ['regionID'] == NULL){
+//			echo "<script language='javascript'>alert('You need to specify the region first :P');</script>";			
+//			return;
+//		}		
+//		if ($_POST ['qEn'] == NULL || $_POST ['aEn']==NULL || $_POST ['bEn']==NULL || $_POST ['cEn']==NULL || $_POST ['dEn']==NULL) {
+//			echo "<script language='javascript'>alert('Question in English not complete :P');</script>";			
+//			return;
+//		}
+//		if ($_POST ['qSv'] == NULL || $_POST ['aSv']==NULL || $_POST ['bSv']==NULL || $_POST ['cSv']==NULL || $_POST ['dSv']==NULL) {
+//			echo "<script language='javascript'>alert('Question in Swedish not complete :P');</script>";			
+//			return;
+//		}
+//		if ($_POST ['sol'] == 0 || $_POST ['score']==0) {
+//			echo "<script language='javascript'>alert('Score or Solution not complete :P');</script>";			
+//			return;
+//		}
 		
 		
 		$regionID = $_POST ['regionID'];
@@ -101,8 +101,46 @@ class RegionqController extends Zend_Controller_Action
 		$qRegionID = $qRegionTB->insert($qRegionRow);
 		
 		
-		echo "<script language='javascript'>alert('Question ".$qRegionID." is Collected!'); location.href = 'index';</script>";
-		return;
+		//		//for test only
+//
+//		var_dump($_FILES);
+//		
+//		echo "Name: " . $_FILES ["file"] ["name"] . "<br>";
+//		echo "Type: " . $_FILES ["file"] ["type"] . "<br>";
+//		echo "Size: " . ($_FILES ["file"] ["size"] / 1024) . " kB<br>";
+//		echo "Temp in: " . $_FILES ["file"] ["tmp_name"];
+		
+		
+		$allowedExts = array ("gif", "jpeg", "jpg", "png" );
+		$temp = explode ( ".", $_FILES ["pic"] ["name"] );
+		$extension = strtolower(end ( $temp ));
+		
+		$info = "";		
+		
+		if ((($_FILES ["pic"] ["type"] == "image/gif") || ($_FILES ["pic"] ["type"] == "image/jpeg") || ($_FILES ["pic"] ["type"] == "image/jpg") || ($_FILES ["pic"] ["type"] == "image/pjpeg") || ($_FILES ["pic"] ["type"] == "image/x-png") || ($_FILES ["pic"] ["type"] == "image/png"))&&in_array($extension, $allowedExts) ) {
+			
+			if($_FILES ["pic"] ["size"] > 5242880){
+				$info .= "Failed to upload the file: only file smaller than 5MB is accepted";				
+			}
+			
+			else if ($_FILES ["pic"] ["error"] > 0) {
+				$info .= "Failed to upload the file: unknown error -> " . $_FILES ["pic"] ["error"] . "<br>";
+			} else {
+				if(move_uploaded_file ( $_FILES ["pic"] ["tmp_name"], "images/R" . $qRegionID . "." . $extension )){
+					
+				} else{
+					$info .= "Failed to upload the file: Upload error! But why??";
+				}
+			}
+			
+		} 
+		else {
+			$info .= "Failed to upload the file: Invalid file type";
+		}
+		
+		
+		echo "<script language='javascript'>alert('Question ".$qRegionID." is successfully collected\\n\\n".$info."'); location.href = 'index';</script>";
+		
 	}
 
 }

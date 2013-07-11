@@ -35,11 +35,10 @@ class PointqController extends Zend_Controller_Action
     {        
     	
     }
-    
+	
 	public function saveAction() {
 		
-		$this->render('index');
-		
+		$this->render ( 'index' );		
 		
 		if ($_POST ['triPoint'] == NULL || $_POST ['q1Point'] == NULL || $_POST ['q2Point'] == NULL) {
 			echo "<script language='javascript'>alert('Goe coordinates not complete :P');</script>";			
@@ -72,7 +71,7 @@ class PointqController extends Zend_Controller_Action
 		$q2Lat = (double)$matches[1];
 		$q2Long = (double)$matches[2];
 		
-		
+
 		
 		if ($_POST ['qEn'] == NULL || $_POST ['aEn']==NULL || $_POST ['bEn']==NULL || $_POST ['cEn']==NULL || $_POST ['dEn']==NULL) {
 			echo "<script language='javascript'>alert('Question in English not complete :P');</script>";			
@@ -86,6 +85,26 @@ class PointqController extends Zend_Controller_Action
 			echo "<script language='javascript'>alert('Score or Solution not complete :P');</script>";			
 			return;
 		}
+		
+
+//		//for test only
+//		$subject = "  57.645833 ,  11.959333  ";
+//		$pattern = '/^\s*(-?\d{1,3}\.\d{2,8})\s*,?\s*(-?\d{1,3}\.\d{2,8})\s*$/';
+//		preg_match ( $pattern, $subject, $matches );
+//		$triLat = (double)$matches[1];
+//		$triLong = (double)$matches[2];
+//		$q1Lat = (double)$matches[1];
+//		$q1Long = (double)$matches[2];
+//		$q2Lat = (double)$matches[1];
+//		$q2Long = (double)$matches[2];
+//
+//		var_dump($_FILES);
+//		
+//		echo "Name: " . $_FILES ["file"] ["name"] . "<br>";
+//		echo "Type: " . $_FILES ["file"] ["type"] . "<br>";
+//		echo "Size: " . ($_FILES ["file"] ["size"] / 1024) . " kB<br>";
+//		echo "Temp in: " . $_FILES ["file"] ["tmp_name"];		
+		
 
 		$pointRow = array (
 			'triLat'=>$triLat,
@@ -143,7 +162,35 @@ class PointqController extends Zend_Controller_Action
 		$qPointTB = new Default_Model_QpointMapper ();
 		
 		$qPointID = $qPointTB->insert($qPointRow);
-
+		
+		$allowedExts = array ("gif", "jpeg", "jpg", "png" );
+		$temp = explode ( ".", $_FILES ["pic"] ["name"] );
+		$extension = strtolower(end ( $temp ));
+		
+		$info = "";		
+		
+		if ((($_FILES ["pic"] ["type"] == "image/gif") || ($_FILES ["pic"] ["type"] == "image/jpeg") || ($_FILES ["pic"] ["type"] == "image/jpg") || ($_FILES ["pic"] ["type"] == "image/pjpeg") || ($_FILES ["pic"] ["type"] == "image/x-png") || ($_FILES ["pic"] ["type"] == "image/png"))&&in_array($extension, $allowedExts) ) {
+			
+			if($_FILES ["pic"] ["size"] > 5242880){
+				$info .= "Failed to upload the file: only file smaller than 5MB is accepted";				
+			}
+			
+			else if ($_FILES ["pic"] ["error"] > 0) {
+				$info .= "Failed to upload the file: unknown error -> " . $_FILES ["pic"] ["error"] . "<br>";
+			} else {
+				if(move_uploaded_file ( $_FILES ["pic"] ["tmp_name"], "images/P" . $qPointID . "." . $extension )){
+					
+				} else{
+					$info .= "Failed to upload the file: Upload error! But why??";
+				}
+			}
+			
+		} 
+		else {
+			$info .= "Failed to upload the file: Invalid file type";
+		}
+		
+		
 		
 //		Keep point operations
 		if (isset ( $_POST ['keepPoint'] )) {
@@ -165,8 +212,9 @@ class PointqController extends Zend_Controller_Action
 			unset ( $_SESSION ['q2Point'] );
 		}
 		
-		echo "<script language='javascript'>alert('Question ".$qPointID." is successfully collected on Point ".$pointID." :D '); location.href = 'index';</script>";
-		return;
+		echo "<script language='javascript'>alert('Question ".$qPointID." is successfully collected\\n\\n".$info."'); location.href = 'index';</script>";
+		
+		
 	}
 
 }

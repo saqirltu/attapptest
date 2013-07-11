@@ -20,7 +20,7 @@ function copyAnswers()
 <form
 	action=<?php
 	echo $this->url ( array ('controller' => 'pointq','action' => 'save' ), 'default', true )?>
-	method="post">
+	method="post" enctype="multipart/form-data">
 	
 
 <!--<table>-->
@@ -191,11 +191,19 @@ function copyAnswers()
             <option value="10" <?php if(isset($_POST ['category']) && $_POST ['category']==10){echo "selected='selected'";}?>>Other</option>
 		</select></td>
 		<td width="20"></td>
-		<td><input type="submit" value="Save"/></td>
+        <td><strong>Image</strong><input type="file" name="pic" accept="image/*"/></td>
+		
 	</tr>
 	<tr>
 		<td><br /></td>
+	</tr>
+    <tr>
+		<td><input type="submit" value="Save"/></td>
+	</tr> 
+    <tr>
+		<td><br /></td>
 	</tr>    
+    
 </table>
 </form>
 
